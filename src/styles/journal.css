@@ -1,0 +1,10 @@
+.journal_forms {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.journal_submit-button {
+    display:flex;
+    justify-content: left;
+}
