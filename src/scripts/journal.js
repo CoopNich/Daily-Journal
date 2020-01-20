@@ -1,29 +1,51 @@
-const journalEntry = {
-    date: "1/15/2020",
-    title: "Group Presentation",
-    content: "Blah blah blah",
-    mood: "Spicy",
+
+let journalEntries = [
+    {
+        date: "1/15/2020",
+        title: "Group Presentation",
+        content: "Blah blah blah",
+        mood: "Spicy",
+    },
+    {
+        date: "1/16/2020",
+        title: "DOM Stuff",
+        content: "Blah blah bleh",
+        mood: "Calm",
+    },
+    {
+        date: "1/17/2020",
+        title: "Scary object stuff",
+        content: "Blaaaaaaaaah",
+        mood: "Tired",
+    },
+]
+
+
+
+
+const createJournalEntry = (date, title, content, mood) => {
+    return `
+        <div>
+            <h2>${title}</h2>
+            <h3>${date}</h3>
+            <section>${content}</section>
+        </div> `
 }
 
-let journalCollection = []
 
-journalCollection.push(journalEntry)
+const journalContainer = document.querySelector(".entryLog")
 
-const journalEntry2 = {
-    date: "1/16/2020",
-    title: "DOM Stuff",
-    content: "Blah blah bleh",
-    mood: "Calm",
+
+const renderJournalEntries = (entries) => {
+    for (let i = 0; i < entries.length; i++) {
+        const entry = entries[i]
+        journalContainer.innerHTML += createJournalEntry(
+            entry.title,
+            entry.date,
+            entry.content
+        )
+    }
+    return
 }
 
-const journalEntry3 = {
-    date: "1/17/2020",
-    title: "Scary object stuff",
-    content: "Blaaaaaaaaah",
-    mood: "Spoopy",
-}
-
-journalCollection.push(journalEntry2)
-journalCollection.push(journalEntry3)
-
-console.log(journalCollection)
+renderJournalEntries(journalEntries);
