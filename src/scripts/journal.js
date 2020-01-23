@@ -11,8 +11,15 @@ const createJournalEntry = (entries) => {
 
 const journalContainer = document.querySelector(".entryLog")
 
-const addEntryToDom = () => {
-    journalContainer.innerHTML += createJournalEntry;
+const addEntryToDom = (entryHTML) => {
+    journalContainer.innerHTML += entryHTML;
 }
 
-
+fetch("http://localhost:3000/entries")
+.then(entry => entry.json())
+.then(parsedEntries => {
+    parsedEntries.forEach(entries => {
+      const  entryAsHTML = createJournalEntry(entries)
+      addEntryToDom(entryAsHTML)
+    })
+})
