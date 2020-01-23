@@ -1,51 +1,25 @@
-
-let journalEntries = [
-    {
-        date: "1/15/2020",
-        title: "Group Presentation",
-        content: "Blah blah blah",
-        mood: "Spicy",
-    },
-    {
-        date: "1/16/2020",
-        title: "DOM Stuff",
-        content: "Blah blah bleh",
-        mood: "Calm",
-    },
-    {
-        date: "1/17/2020",
-        title: "Scary object stuff",
-        content: "Blaaaaaaaaah",
-        mood: "Tired",
-    },
-]
-
-
-
-
-const createJournalEntry = (date, title, content, mood) => {
+const createJournalEntry = (entries) => {
     return `
         <div>
-            <h2>${title}</h2>
-            <h3>${date}</h3>
-            <section>${content}</section>
+            <h2>${entries.title}</h2>
+            <h3>${entries.date}</h3>
+            <section>${entries.content}</section>
+            <section>${entries.mood}</section>
         </div> `
 }
 
 
 const journalContainer = document.querySelector(".entryLog")
 
-
-const renderJournalEntries = (entries) => {
-    for (let i = 0; i < entries.length; i++) {
-        const entry = entries[i]
-        journalContainer.innerHTML += createJournalEntry(
-            entry.title,
-            entry.date,
-            entry.content
-        )
-    }
-    return
+const addEntryToDom = (entryHTML) => {
+    journalContainer.innerHTML += entryHTML;
 }
 
-renderJournalEntries(journalEntries);
+fetch("http://localhost:3000/entries")
+.then(entry => entry.json())
+.then(parsedEntries => {
+    parsedEntries.forEach(entries => {
+      const  entryAsHTML = createJournalEntry(entries)
+      addEntryToDom(entryAsHTML)
+    })
+})
