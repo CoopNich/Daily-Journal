@@ -1,4 +1,4 @@
-
+import createJournalEntry from "./entryComponent.js"
 
 const addEntryToDom = (entryHTML) => { 
     console.log("addEntryToDom")
@@ -13,3 +13,5 @@ const renderEntries = (entriesArray) => {
         addEntryToDom(entryAsHTML)
     })
 }
+
+export default renderEntries

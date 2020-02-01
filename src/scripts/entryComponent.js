@@ -8,3 +8,5 @@ const createJournalEntry = (entries) => {
             <section>${entries.mood}</section>
         </div> `
 }
+
+export default createJournalEntry
