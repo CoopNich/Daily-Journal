@@ -1,25 +1,25 @@
 {
-"entries": [
+  "entries": [
     {
-        "id": 1,
-        "date": "1/15/2020",
-        "title": "Group Presentation",
-        "content": "Blah blah blah",
-        "mood": "Spicy"
+      "id": 1,
+      "date": "1/15/2020",
+      "title": "Group Presentation",
+      "content": "Blah blah blah",
+      "mood": "Spicy"
     },
     {
-        "id": 2,
-        "date": "1/16/2020",
-        "title": "DOM Stuff",
-        "content": "Blah blah bleh",
-        "mood": "Calm"
+      "id": 2,
+      "date": "1/16/2020",
+      "title": "DOM Stuff",
+      "content": "Blah blah bleh",
+      "mood": "Calm"
     },
     {
-        "id": 3,
-        "date": "1/17/2020",
-        "title": "Scary object stuff",
-        "content": "Blaaaaaaaaah",
-        "mood": "Tired"
+      "id": 3,
+      "date": "1/17/2020",
+      "title": "Scary object stuff",
+      "content": "Blaaaaaaaaah",
+      "mood": "Tired"
     }
-]
+  ]
 }
