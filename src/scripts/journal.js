@@ -1,6 +1,5 @@
 import API from "./data.js"
 import renderEntries from "./entriesDOM.js"
-import addEntryToDom from "./entriesDOM.js"
 
 
 API.getJournalEntries()
@@ -31,9 +30,26 @@ journalSubmit.addEventListener("click", event => {
    API.saveJournalEntry(createNewEntry)
       .then(() => {
          API.getJournalEntries()
-         .then(renderEntries)
+            .then(renderEntries)
       })
+})
+
+const journalContainer = document.querySelector(".entryLog")
+const radioButtons = document.getElementsByName("filterMood")
+
+radioButtons.forEach(button => {
+   button.addEventListener("click", event => {
+      journalContainer.innerHTML = "";
+      const filteredMood = event.target.value
+      API.getJournalEntries()
+         .then(entries => {
+            const filteredEntries = entries.filter(entry => {
+               if (entry.mood === filteredMood) {
+                  return entry
+               }
+            })
+            renderEntries(filteredEntries)
+
+         })
    })
-
-
-
+})
