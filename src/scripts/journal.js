@@ -53,3 +53,15 @@ radioButtons.forEach(button => {
          })
    })
 })
+
+journalContainer.addEventListener("click", event => {
+   if (event.target.id.startsWith("deleteEntry--")) {
+       // Extract entry id from the button's id attribute
+       const entryToDelete = event.target.id.split("--")[1]
+
+       // Invoke the delete method, then get all entries and render them
+       API.deleteEntry(entryToDelete)
+           .then(API.getJournalEntries)
+           .then(renderEntries)
+   }
+})
