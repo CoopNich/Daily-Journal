@@ -2,21 +2,14 @@
   "entries": [
     {
       "id": 1,
-      "date": "1/15/2020",
+      "date": "2020-01-15",
       "title": "Group Presentation",
       "content": "Blah blah blah",
       "mood": "Good"
     },
     {
-      "id": 2,
-      "date": "1/16/2020",
-      "title": "DOM Stuff",
-      "content": "Blah blah bleh",
-      "mood": "Good"
-    },
-    {
       "id": 3,
-      "date": "1/17/2020",
+      "date": "2020-01-17",
       "title": "Scary object stuff",
       "content": "Blaaaaaaaaah",
       "mood": "Meh"

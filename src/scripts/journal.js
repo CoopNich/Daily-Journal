@@ -24,14 +24,19 @@ const createNewEntryFactory = (date, title, content, mood) => {
 }
 
 
-
+// TESTING EDIT vs SAVE FUNCTION
 journalSubmit.addEventListener("click", event => {
+   const hiddenRecipeId = document.querySelector("#recipeId")
+
+   if (hiddenRecipeId.value !== "") {
+       editRecipe(recipeId)
+   } else {
    const createNewEntry = createNewEntryFactory(journalDate.value, journalConcepts.value, journalEntry.value, journalMood.value)
    API.saveJournalEntry(createNewEntry)
       .then(() => {
          API.getJournalEntries()
             .then(renderEntries)
-      })
+      })}
 })
 
 const journalContainer = document.querySelector(".entryLog")
@@ -54,14 +59,44 @@ radioButtons.forEach(button => {
    })
 })
 
+// this captures the delete button being clicked
 journalContainer.addEventListener("click", event => {
    if (event.target.id.startsWith("deleteEntry--")) {
-       // Extract entry id from the button's id attribute
-       const entryToDelete = event.target.id.split("--")[1]
+      // Extract entry id from the button's id attribute
+      const entryToDelete = event.target.id.split("--")[1]
 
-       // Invoke the delete method, then get all entries and render them
-       API.deleteEntry(entryToDelete)
-           .then(API.getJournalEntries)
-           .then(renderEntries)
+      // Invoke the delete method, then get all entries and render them
+      API.deleteEntry(entryToDelete)
+         .then(API.getJournalEntries)
+         .then(renderEntries)
    }
 })
+
+// this captures the edit button being clicked
+journalContainer.addEventListener("click", event => {
+   if (event.target.id.startsWith("editEntry--")) {
+      const entryIdToEdit = event.target.id.split("--")[1]
+      updateFormFields(entryIdToEdit)
+   }
+})
+
+const updateFormFields = entryId => {
+   
+   const hiddenEntryId = document.querySelector("#entryId")
+   const entryTitleInput = document.querySelector("#concepts")
+   const entryDateInput = document.querySelector("#journalDate")
+   const entryContentInput = document.querySelector("#journalEntry")
+   const entryMoodInput = document.querySelector("#mood")
+
+   fetch(`http://localhost:3000/entries/${entryId}`)
+   .then(response => response.json())
+   .then(entry => {
+     
+       hiddenEntryId.value = entry.id 
+       entryTitleInput.value = entry.title
+       entryDateInput.value = entry.date
+       entryContentInput.value = entry.content
+       entryMoodInput.value = entry.mood
+   })
+}
+
