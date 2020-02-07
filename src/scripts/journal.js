@@ -1,7 +1,7 @@
 import API from "./data.js"
 import renderEntries from "./entriesDOM.js"
 
-
+// this populates the journal with saved entries as soon as the page loads
 API.getJournalEntries()
    .then(parsedEntries => {
       renderEntries(parsedEntries)
@@ -26,19 +26,21 @@ const createNewEntryFactory = (date, title, content, mood) => {
 
 // TESTING EDIT vs SAVE FUNCTION
 journalSubmit.addEventListener("click", event => {
-   const hiddenRecipeId = document.querySelector("#recipeId")
+   const hiddenEntryId = document.querySelector("#entryId")
 
-   if (hiddenRecipeId.value !== "") {
-       editRecipe(recipeId)
+   if (hiddenEntryId.value !== "") {
+      editEntry(hiddenEntryId.value)
    } else {
-   const createNewEntry = createNewEntryFactory(journalDate.value, journalConcepts.value, journalEntry.value, journalMood.value)
-   API.saveJournalEntry(createNewEntry)
-      .then(() => {
-         API.getJournalEntries()
-            .then(renderEntries)
-      })}
+      const createNewEntry = createNewEntryFactory(journalDate.value, journalConcepts.value, journalEntry.value, journalMood.value)
+      API.saveJournalEntry(createNewEntry)
+         .then(() => {
+            API.getJournalEntries()
+               .then(renderEntries)
+         })
+   }
 })
 
+// This filters and renders entries by mood with radio buttons
 const journalContainer = document.querySelector(".entryLog")
 const radioButtons = document.getElementsByName("filterMood")
 
@@ -80,8 +82,10 @@ journalContainer.addEventListener("click", event => {
    }
 })
 
+// this, combined with the edit button, takes the values from 
+// a saved entry and populates the journal inputs with said values for editing
 const updateFormFields = entryId => {
-   
+
    const hiddenEntryId = document.querySelector("#entryId")
    const entryTitleInput = document.querySelector("#concepts")
    const entryDateInput = document.querySelector("#journalDate")
@@ -89,14 +93,34 @@ const updateFormFields = entryId => {
    const entryMoodInput = document.querySelector("#mood")
 
    fetch(`http://localhost:3000/entries/${entryId}`)
-   .then(response => response.json())
-   .then(entry => {
-     
-       hiddenEntryId.value = entry.id 
-       entryTitleInput.value = entry.title
-       entryDateInput.value = entry.date
-       entryContentInput.value = entry.content
-       entryMoodInput.value = entry.mood
-   })
+      .then(response => response.json())
+      .then(entry => {
+
+         hiddenEntryId.value = entry.id
+         entryTitleInput.value = entry.title
+         entryDateInput.value = entry.date
+         entryContentInput.value = entry.content
+         entryMoodInput.value = entry.mood
+      })
 }
 
+const editEntry = id => {
+   const updatedObject = {
+      title: document.querySelector("#concepts").value,
+      date: document.querySelector("#journalDate").value,
+      content: document.querySelector("#journalEntry").value,
+      mood: document.querySelector("#mood").value
+   }
+   fetch(`http://localhost:3000/entries/${id}`, {
+      method: "PUT",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(updatedObject)
+  })
+  .then(res => res.json())
+  .then(() => {
+      document.querySelector("#entryId").value = ""
+  })
+
+}
