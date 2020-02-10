@@ -27,9 +27,16 @@ const createNewEntryFactory = (date, title, content, mood) => {
 // TESTING EDIT vs SAVE FUNCTION
 journalSubmit.addEventListener("click", event => {
    const hiddenEntryId = document.querySelector("#entryId")
+   const selectFields = document.querySelectorAll(".clear")
+   const clearFields = () => selectFields.forEach(field => {
+      field.value = ""
+   })
 
    if (hiddenEntryId.value !== "") {
       editEntry(hiddenEntryId.value)
+      .then(API.getJournalEntries)
+         .then(renderEntries)
+         .then(clearFields)
    } else {
       const createNewEntry = createNewEntryFactory(journalDate.value, journalConcepts.value, journalEntry.value, journalMood.value)
       API.saveJournalEntry(createNewEntry)
@@ -111,16 +118,16 @@ const editEntry = id => {
       content: document.querySelector("#journalEntry").value,
       mood: document.querySelector("#mood").value
    }
-   fetch(`http://localhost:3000/entries/${id}`, {
+  return fetch(`http://localhost:3000/entries/${id}`, {
       method: "PUT",
       headers: {
-          "Content-Type": "application/json"
+         "Content-Type": "application/json"
       },
       body: JSON.stringify(updatedObject)
-  })
-  .then(res => res.json())
-  .then(() => {
-      document.querySelector("#entryId").value = ""
-  })
+   })
+      .then(res => res.json())
+      .then(() => {
+         document.querySelector("#entryId").value = ""
+      })
 
 }
