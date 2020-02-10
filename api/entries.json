@@ -1,25 +1,18 @@
 {
   "entries": [
     {
-      "id": 1,
-      "date": "1/15/2020",
       "title": "Group Presentation",
-      "content": "Blah blah blah",
-      "mood": "Good"
+      "date": "2020-01-15",
+      "content": "Blah blah ",
+      "mood": "Confident",
+      "id": 1
     },
     {
-      "id": 2,
-      "date": "1/16/2020",
-      "title": "DOM Stuff",
-      "content": "Blah blah bleh",
-      "mood": "Good"
-    },
-    {
-      "id": 3,
-      "date": "1/17/2020",
-      "title": "Scary object stuff",
-      "content": "Blaaaaaaaaah",
-      "mood": "Meh"
+      "title": "CSS - Daily Journal",
+      "date": "2020-02-10",
+      "content": "Bryan talked about CSS, and I fixed my edit button yay",
+      "mood": "Good",
+      "id": 2
     }
   ]
 }

@@ -7,6 +7,7 @@ const createJournalEntry = (entries) => {
             <section>${entries.content}</section>
             <section>${entries.mood}</section>
             <button id="deleteEntry--${entries.id}">Delete</button>
+            <button id="editEntry--${entries.id}">Edit</button>
         </div> `
 }
 

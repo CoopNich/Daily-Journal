@@ -15,19 +15,23 @@
 <body>
   <form action=""></form>
   <fieldset class=journal_forms>
+
+    <!-- hidden input field for EDIT function -->
+    <form><input type="hidden" id="entryId" value="" /></form>
+
     <label for="journalDate">Date of entry</label>
-    <input class="date" type="date" name="journalDate" id="journalDate">
+    <input class="date clear" type="date" name="journalDate" id="journalDate">
     <label for="concepts">Concepts covered</label>
-    <input class="concepts" type="text" name="concepts" id="concepts">
+    <input class="concepts clear" type="text" name="concepts" id="concepts">
     <label for="journalEntry">Journal Entry </label>
-    <textarea class="journalEntry" id="journalEntry" name="journalEntry" rows="5" cols="30">
+    <textarea class="journalEntry clear" id="journalEntry" name="journalEntry" rows="5" cols="30">
         </textarea>
     <label for="mood">How ya feeling?</label>
     <select class="mood" id="mood" name="mood">
-      <option value="confident">Confident</option>
-      <option value="meh">Meh</option>
-      <option value="tired">Tired</option>
-      <option value="good">Good</option>
+      <option value="Confident">Confident</option>
+      <option value="Meh">Meh</option>
+      <option value="Tired">Tired</option>
+      <option value="Good">Good</option>
     </select>
   </fieldset>
   <form class=journal_submit-button>
@@ -37,21 +41,17 @@
     <fieldset>
       <legend>Filter Journal Entries By Mood</legend>
       <div>
-        <input type="radio" id="moodChoice1"
-         name="filterMood" value="Confident" checked>
+        <input type="radio" id="moodChoice1" name="filterMood" value="Confident" checked>
         <label for="moodChoice1">Confident</label>
-  
-        <input type="radio" id="moodChoice2"
-         name="filterMood" value="Meh">
+
+        <input type="radio" id="moodChoice2" name="filterMood" value="Meh">
         <label for="moodChoice2">Meh</label>
-  
-        <input type="radio" id="moodChoice3"
-         name="filterMood" value="Tired">
+
+        <input type="radio" id="moodChoice3" name="filterMood" value="Tired">
         <label for="moodChoice3">Tired</label>
 
-        <input type="radio" id="moodChoice4"
-        name="filterMood" value="Good">
-       <label for="moodChoice4">Good</label>
+        <input type="radio" id="moodChoice4" name="filterMood" value="Good">
+        <label for="moodChoice4">Good</label>
       </div>
       <!-- <div>
         <button id ="filter_button" type="button">Filter</button>
@@ -62,7 +62,7 @@
   <!-- <script type ="module" src="scripts/data.js"> </script>
   <script type ="module" src="scripts/entriesDOM.js"> </script>
   <script type ="module" src="scripts/entryComponent.js"> </script> -->
-  <script type ="module" src="scripts/journal.js"> </script>
+  <script type="module" src="scripts/journal.js"> </script>
 </body>
 
 </html>
