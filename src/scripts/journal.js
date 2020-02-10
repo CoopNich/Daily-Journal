@@ -33,7 +33,7 @@ journalSubmit.addEventListener("click", event => {
    })
 
    if (hiddenEntryId.value !== "") {
-      editEntry(hiddenEntryId.value)
+      API.editEntry(hiddenEntryId.value)
       .then(API.getJournalEntries)
          .then(renderEntries)
          .then(clearFields)
@@ -109,25 +109,4 @@ const updateFormFields = entryId => {
          entryContentInput.value = entry.content
          entryMoodInput.value = entry.mood
       })
-}
-
-const editEntry = id => {
-   const updatedObject = {
-      title: document.querySelector("#concepts").value,
-      date: document.querySelector("#journalDate").value,
-      content: document.querySelector("#journalEntry").value,
-      mood: document.querySelector("#mood").value
-   }
-  return fetch(`http://localhost:3000/entries/${id}`, {
-      method: "PUT",
-      headers: {
-         "Content-Type": "application/json"
-      },
-      body: JSON.stringify(updatedObject)
-   })
-      .then(res => res.json())
-      .then(() => {
-         document.querySelector("#entryId").value = ""
-      })
-
 }
