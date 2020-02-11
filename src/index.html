@@ -34,10 +34,10 @@
       <option value="Good">Good</option>
     </select>
   </fieldset>
-  <form class=journal_submit-button>
+  <form class="journal_submit-button">
     <input id="submit_button" type="button" value="Record Journal Entry">
   </form>
-  <form>
+  <div class="filter_options">
     <fieldset>
       <legend>Filter Journal Entries By Mood</legend>
       <div>
@@ -53,15 +53,13 @@
         <input type="radio" id="moodChoice4" name="filterMood" value="Good">
         <label for="moodChoice4">Good</label>
       </div>
-      <!-- <div>
-        <button id ="filter_button" type="button">Filter</button>
-      </div> -->
     </fieldset>
-  </form>
+    <fieldset>
+      <legend>Filter Journal Entries By Keyword</legend>
+      <input type="text" id="entrySearch" name="entrySearch" placeholder="Filter by keyword"></input>
+    </fieldset>
+  </div>
   <section class="entryLog entry_collection"></section>
-  <!-- <script type ="module" src="scripts/data.js"> </script>
-  <script type ="module" src="scripts/entriesDOM.js"> </script>
-  <script type ="module" src="scripts/entryComponent.js"> </script> -->
   <script type="module" src="scripts/journal.js"> </script>
 </body>
 

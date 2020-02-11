@@ -43,42 +43,63 @@ const events = {
         })
         )
     },
-    filterEntries() {
+    filterEntriesByMood() {
         const radioButtons = document.getElementsByName("filterMood")
         radioButtons.forEach(button => {
             button.addEventListener("click", event => {
-               journalContainer.innerHTML = "";
-               const filteredMood = event.target.value
-               API.getJournalEntries()
-                  .then(entries => {
-                     const filteredEntries = entries.filter(entry => {
-                        if (entry.mood === filteredMood) {
-                           return entry
-                        }
-                     })
-                     renderEntries(filteredEntries)
-         
-                  })
+                journalContainer.innerHTML = "";
+                const filteredMood = event.target.value
+                API.getJournalEntries()
+                    .then(entries => {
+                        const filteredEntries = entries.filter(entry => {
+                            if (entry.mood === filteredMood) {
+                                return entry
+                            }
+                        })
+                        renderEntries(filteredEntries)
+
+                    })
             })
-         })
+        })
     },
-    deleteEntry () {
+    filterEntriesBySearch() {
+        const keywordSearch = document.getElementById("entrySearch")
+        keywordSearch.addEventListener('keyup', event => {
+            if (event.keyCode === 13) {
+                const filteredSearch = event.target.value
+                API.getJournalEntries()
+                    .then(entries => {
+                        const filteredArray = entries.filter(entry => {
+                            for (const entryInfo of Object.values(entry)) {
+                                const infoType = typeof entryInfo
+                                if (infoType === "string" && entryInfo.includes(filteredSearch)) {
+                                    return entry
+                                }
+                            }
+                        })
+
+                        renderEntries(filteredArray)
+                    })
+            }
+        })
+    },
+    deleteEntry() {
         journalContainer.addEventListener("click", event => {
             if (event.target.id.startsWith("deleteEntry--")) {
-               const entryToDelete = event.target.id.split("--")[1]
-               API.deleteEntry(entryToDelete)
-                  .then(API.getJournalEntries)
-                  .then(renderEntries)
+                const entryToDelete = event.target.id.split("--")[1]
+                API.deleteEntry(entryToDelete)
+                    .then(API.getJournalEntries)
+                    .then(renderEntries)
             }
-         })
+        })
     },
-    editEntry () {
+    editEntry() {
         journalContainer.addEventListener("click", event => {
             if (event.target.id.startsWith("editEntry--")) {
-               const entryIdToEdit = event.target.id.split("--")[1]
-               updateFormFields(entryIdToEdit)
+                const entryIdToEdit = event.target.id.split("--")[1]
+                updateFormFields(entryIdToEdit)
             }
-         })
+        })
     },
 }
 
