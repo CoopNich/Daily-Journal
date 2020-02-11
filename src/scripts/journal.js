@@ -13,13 +13,19 @@ API.getJournalEntries()
 events.editOrCreateEntry()
 
 // This filters and renders entries by mood with radio buttons
-events.filterEntries()
+events.filterEntriesByMood()
 
-// this captures the delete button being clicked
+// This filters and renders entries by searching with a keyword
+events.filterEntriesBySearch()
+
+// this captures the delete button being clicked, then deletes the selected entry
 events.deleteEntry()
 
 
-// this captures the edit button being clicked
+// this captures the edit button being clicked, then repopulates all input fields with the selected entry's values. 
 events.editEntry()
+
+
+
 
 
